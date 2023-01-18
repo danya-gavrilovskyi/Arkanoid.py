@@ -102,7 +102,67 @@ class ExtraHeart():
         self.move(dt)
 
 def draw():
-    pass
+    screen.clear()
+    screen.fill(('#B39F61'))
+    if hearts and (obstacles or hard_obstacles):
+        paddle.draw()
+        ball.draw()
+        for obstacle in obstacles:
+            if obstacle.hit(ball):
+                ball.velocity_y *= -1
+                obstacles.remove(obstacle)
+            obstacle.draw()
+
+        for obstacle in hard_obstacles:
+            if obstacle.hit(ball):
+                obstacle.hits += 1
+                obstacle.color = 'lightblue'
+                if obstacle.hits == 2:
+                    hard_obstacles.remove(obstacle)
+                ball.velocity_y *= -1
+            obstacle.draw()
+
+        for heart in hearts:
+            heart.draw()
+
+        for extraheart in extrahearts:
+            extraheart.draw()
+
+    elif not hearts:
+        screen.draw.text('You lose !!!', (210, 250), color='black', fontsize=50)
+    elif not obstacles and not hard_obstacles:
+        screen.draw.text('You win !!!', (210, 250), color='black', fontsize=50)
+
+def update(dt):
+    global previous_heart_x
+    ball.update(dt, paddle.x, paddle.y) 
+    if 0.052 > random.random() > 0.05:
+        extrahearts.append(ExtraHeart(Actor('bonusheart', (random.randint(0, WIDTH), 15))))
+
+    for extraheart in extrahearts:
+        extraheart.update(dt)
+        extraheart.draw()
+        if extraheart.hit(paddle):
+            extrahearts.remove(extraheart)
+
+def on_mouse_move(pos):
+    x = pos[0] - (paddle_w // 2)
+    paddle.x = x
+
+def add_obstacles(obstacles: list, number_of_obstacles: int, type_of_obstacles: str, start_coords: list):
+    obst_count = 0
+    x = start_coords[0]
+    y = start_coords[1]
+    if type_of_obstacles == 'hard':
+        while obst_count < number_of_obstacles:
+            obstacles.append(HardObstacle(x, y, 50, 20))
+            obst_count+=1
+            x+= 80
+    else:
+        while obst_count < number_of_obstacles:
+            obstacles.append(Obstacle(x, y, 50, 20))
+            obst_count+=1
+            x+= 80
 
 WIDTH = 600
 HEIGHT = 600
