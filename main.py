@@ -118,5 +118,8 @@ obstacles = []
 hard_obstacles = []
 extrahearts = []
 
+add_obstacles(hard_obstacles, 7, 'hard', [30, 50])
+add_obstacles(obstacles, 6, 'default', [70, 80])
+add_obstacles(obstacles, 7, 'default', [30, 110])
 
 pgzrun.go()
