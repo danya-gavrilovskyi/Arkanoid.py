@@ -73,6 +73,9 @@ class HardObstacle():
         self.rect = Rect(self.x, self.y, self.width, self.height)
         self.color = 'darkblue'
 
+    def draw(self):
+        screen.draw.filled_rect(self.rect, self.color)
+
 def draw():
     pass
 
