@@ -149,6 +149,21 @@ def on_mouse_move(pos):
     x = pos[0] - (paddle_w // 2)
     paddle.x = x
 
+def add_obstacles(obstacles: list, number_of_obstacles: int, type_of_obstacles: str, start_coords: list):
+    obst_count = 0
+    x = start_coords[0]
+    y = start_coords[1]
+    if type_of_obstacles == 'hard':
+        while obst_count < number_of_obstacles:
+            obstacles.append(HardObstacle(x, y, 50, 20))
+            obst_count+=1
+            x+= 80
+    else:
+        while obst_count < number_of_obstacles:
+            obstacles.append(Obstacle(x, y, 50, 20))
+            obst_count+=1
+            x+= 80
+
 WIDTH = 600
 HEIGHT = 600
 
