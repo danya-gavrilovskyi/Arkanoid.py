@@ -80,6 +80,27 @@ class HardObstacle():
         if (self.x <= ball.x <= (self.x + self.width)) and (self.y <= (ball.y-ball.radius) <= (self.y + self.height)):
             return True
 
+class ExtraHeart():
+    def __init__(self, actor:Actor):
+        self.actor = actor
+        self.velocity_y = 100
+
+    def draw(self):
+        self.actor.draw()
+
+    def move(self, dt):
+        self.actor.y += round(self.velocity_y * dt)
+
+    def hit(self, paddle:Paddle):
+        global previous_heart_x
+        if (paddle.x <= self.actor.x <= paddle.x + paddle.width) and (paddle.y <= self.actor.y <= paddle.y + paddle.height):
+            previous_heart_x += 35
+            hearts.append(Actor('heart', (previous_heart_x, 20)))
+            return True
+
+    def update(self, dt):
+        self.move(dt)
+
 def draw():
     pass
 
