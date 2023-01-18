@@ -72,5 +72,6 @@ HEIGHT = 600
 paddle_h = 35
 paddle_w = 200
 paddle = Paddle(WIDTH//2 - (paddle_w//2), HEIGHT - paddle_h, paddle_h, paddle_w)
+ball = Ball(WIDTH // 2, HEIGHT//2)
 
 pgzrun.go()
