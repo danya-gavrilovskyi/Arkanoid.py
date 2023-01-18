@@ -145,6 +145,10 @@ def update(dt):
         if extraheart.hit(paddle):
             extrahearts.remove(extraheart)
 
+def on_mouse_move(pos):
+    x = pos[0] - (paddle_w // 2)
+    paddle.x = x
+
 WIDTH = 600
 HEIGHT = 600
 
