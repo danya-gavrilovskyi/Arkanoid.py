@@ -102,7 +102,36 @@ class ExtraHeart():
         self.move(dt)
 
 def draw():
-    pass
+    screen.clear()
+    screen.fill(('#B39F61'))
+    if hearts and (obstacles or hard_obstacles):
+        paddle.draw()
+        ball.draw()
+        for obstacle in obstacles:
+            if obstacle.hit(ball):
+                ball.velocity_y *= -1
+                obstacles.remove(obstacle)
+            obstacle.draw()
+
+        for obstacle in hard_obstacles:
+            if obstacle.hit(ball):
+                obstacle.hits += 1
+                obstacle.color = 'lightblue'
+                if obstacle.hits == 2:
+                    hard_obstacles.remove(obstacle)
+                ball.velocity_y *= -1
+            obstacle.draw()
+
+        for heart in hearts:
+            heart.draw()
+
+        for extraheart in extrahearts:
+            extraheart.draw()
+
+    elif not hearts:
+        screen.draw.text('You lose !!!', (210, 250), color='black', fontsize=50)
+    elif not obstacles and not hard_obstacles:
+        screen.draw.text('You win !!!', (210, 250), color='black', fontsize=50)
 
 WIDTH = 600
 HEIGHT = 600
