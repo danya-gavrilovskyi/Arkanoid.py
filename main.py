@@ -76,6 +76,10 @@ class HardObstacle():
     def draw(self):
         screen.draw.filled_rect(self.rect, self.color)
 
+    def hit(self, ball:Ball):
+        if (self.x <= ball.x <= (self.x + self.width)) and (self.y <= (ball.y-ball.radius) <= (self.y + self.height)):
+            return True
+
 def draw():
     pass
 
