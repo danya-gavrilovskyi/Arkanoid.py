@@ -63,6 +63,16 @@ class Obstacle():
         if (self.x <= ball.x <= (self.x + self.width)) and (self.y <= (ball.y-ball.radius) <= (self.y + self.height)):
             return True
 
+class HardObstacle():
+    def __init__(self, x, y, width, height):
+        self.x = x
+        self.y = y
+        self.height = height
+        self.width = width
+        self.hits = 0
+        self.rect = Rect(self.x, self.y, self.width, self.height)
+        self.color = 'darkblue'
+
 def draw():
     pass
 
